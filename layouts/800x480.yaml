@@ -1,0 +1,280 @@
+font: !include
+  file: fonts/fonts.yaml
+  vars:
+    text_sm: 26
+    text_md: 30
+    text_lg: 34
+    text_xl: 48
+    text_xxl: 64
+    icons_sm: 26
+    icons_md: 32
+    icons_lg: 40
+    icons_xl: 48
+    icons_xxl: 56
+
+.sizing:
+  - &nav_widget_vars
+    height: 65
+    padding: 8
+
+  - &page_styles
+    <<: !include styles/page_styles.yaml
+    pad_top: 65
+    pad_bottom: 65
+
+  - &container_styles
+    <<: !include styles/container_styles.yaml
+    pad_top: 0
+    pad_bottom: 0
+    pad_left: 10
+    pad_right: 10
+
+  - &button_layout
+    <<: !include styles/button_layout_4x3.yaml
+    pad_column: 10
+    pad_row: 10
+
+  - &button_widget_vars
+    width: 24%
+    height: 100
+
+  - &wide_button_widget_vars
+    width: 49%
+    height: 100
+
+script:
+  - id: go_home
+    then:
+      - lvgl.page.show: ${home_page}
+
+lvgl:
+  default_font: roboto_md
+  theme: !include themes/main.yaml
+  top_layer:
+    widgets:
+      - <<: !include { file: widgets/header/widget.yaml, vars: { <<: *nav_widget_vars } }
+      - <<: !include { file: widgets/footer/widget.yaml, vars: { <<: *nav_widget_vars } }
+      - <<: !include { file: widgets/boot_screen/widget.yaml }
+  pages:
+    - id: splash
+      skip: true
+      on_load:
+        - script.execute: go_home
+
+    - id: lighting_1
+      <<: *page_styles
+      on_load:
+        - lvgl.label.update:
+            id: page_title
+            text: Lampen in huis
+      widgets:
+        - obj:
+            <<: *container_styles
+            layout:
+              <<: *button_layout
+            widgets:
+              - button: # begane grond lampen
+                  <<: !include
+                    file: widgets/buttons/icon_text_buttons/light_group_buttons/widget.yaml
+                    vars:
+                      uid: lampen_begane_grond
+                      entity_id: light.begane_grond
+                      text: Begane grond
+                      <<: *wide_button_widget_vars
+              - button: # lampen_boven
+                  <<: !include
+                    file: widgets/buttons/icon_text_buttons/light_group_buttons/widget.yaml
+                    vars:
+                      uid: lampen_boven
+                      entity_id: light.boven
+                      text: Boven verdieping
+                      <<: *wide_button_widget_vars
+              - button: # woonkamer lamp
+                  <<: !include
+                    file: widgets/buttons/icon_text_buttons/light_buttons/widget.yaml
+                    vars:
+                      uid: lampen_woonkamer
+                      entity_id: light.woonkamer
+                      text: Woonkamer
+                      <<: *button_widget_vars
+              - button: # keuken lamp
+                  <<: !include
+                    file: widgets/buttons/icon_text_buttons/light_buttons/widget.yaml
+                    vars:
+                      uid: lampen_keuken
+                      entity_id: light.keuken
+                      text: Keuken
+                      <<: *button_widget_vars
+              - button: # gang lampen
+                  <<: !include
+                    file: widgets/buttons/icon_text_buttons/light_buttons/widget.yaml
+                    vars:
+                      uid:  lampen_boven_gang
+                      entity_id: light.boven_gang
+                      text: Gang
+                      <<: *button_widget_vars
+              - button: # Hoofdslaapkaner lamp
+                  <<: !include
+                    file: widgets/buttons/icon_text_buttons/light_buttons/widget.yaml
+                    vars:
+                      uid:  lampen_hoofdslaapkamer
+                      entity_id: light.hoofdslaapkamer
+                      text: Hoofd
+                      <<: *button_widget_vars
+              - button: # eethoek lamp
+                  <<: !include
+                    file: widgets/buttons/icon_text_buttons/light_buttons/widget.yaml
+                    vars:
+                      uid: lampen_eethoek
+                      entity_id: light.eethoek
+                      text: Eethoek
+                      <<: *button_widget_vars
+              - button: # tvhoek lamp
+                  <<: !include
+                    file: widgets/buttons/icon_text_buttons/light_buttons/widget.yaml
+                    vars:
+                      uid: lampen_tv
+                      entity_id: light.tv
+                      text: TV
+                      <<: *button_widget_vars
+              - button: # slaapkamer jess lamp
+                  <<: !include
+                    file: widgets/buttons/icon_text_buttons/light_buttons/widget.yaml
+                    vars:
+                      uid: lampen_slaapkamer_jess
+                      entity_id: light.slaapkamer_jess
+                      text: Jess
+                      <<: *button_widget_vars
+              - button: # slaapkamer slaapkamer imre lamp
+                  <<: !include
+                    file: widgets/buttons/icon_text_buttons/light_buttons/widget.yaml
+                    vars:
+                      uid: lampen_slaapkamer_imre
+                      entity_id: light.slaapkamer_imre
+                      text: Imre
+                      <<: *button_widget_vars    
+
+    - id: lighting_2
+      <<: *page_styles
+      on_load:
+        - lvgl.label.update:
+            id: page_title
+            text: Lampen buiten
+      widgets:
+        - obj:
+            <<: *container_styles
+            layout:
+              <<: *button_layout
+            widgets:
+              - button: # buiten lampen
+                  <<: !include
+                    file: widgets/buttons/icon_text_buttons/light_group_buttons/widget.yaml
+                    vars:
+                      uid: lampen_tuin
+                      entity_id: light.tuin
+                      text: Tuin
+                      <<: *wide_button_widget_vars
+                - button: # buiten lampen
+                  <<: !include
+                    file: widgets/buttons/icon_text_buttons/light_group_buttons/widget.yaml
+                    vars:
+                      uid: lampen_tuinhuis
+                      entity_id: light.tuinhuis
+                      text: Tuinhuis
+                      <<: *wide_button_widget_vars
+
+              - button: # door lampen
+                  <<: !include
+                    file: widgets/buttons/icon_text_buttons/light_buttons/widget.yaml
+                    vars:
+                      uid: lamp_outside_1
+                      entity_id: light.outside_1
+                      text: Door Lampen
+                      <<: *button_widget_vars
+
+              - button: # deck lampen
+                  <<: !include
+                    file: widgets/buttons/icon_text_buttons/light_buttons/widget.yaml
+                    vars:
+                      uid: lamp_outside_2
+                      entity_id: light.outside_2
+                      text: Deck Lampen
+                      <<: *button_widget_vars
+
+
+packages:
+  # header
+  header_sensors: !include { file: widgets/header/sensors.yaml }
+
+  # boot screen
+  boot_screen_sensors: !include { file: widgets/boot_screen/sensors.yaml }
+
+  # lighting
+  lampen_boven_widget_sensors: !include { file: widgets/buttons/icon_text_buttons/light_group_buttons/sensors.yaml, vars: {
+    uid: lampen_boven,
+    entity_id: light.boven
+  }}
+
+  lampen_boven_gang_widget_sensors: !include { file: widgets/buttons/icon_text_buttons/light_buttons/sensors.yaml, vars: {
+    uid:  lampen_boven_gang,
+    entity_id: light.boven_gang
+  }}
+
+  lamp_hoofd_widget_sensors: !include { file: widgets/buttons/icon_text_buttons/light_buttons/sensors.yaml, vars: {
+    uid:  lampen_hoofdslaapkamer,
+    entity_id: light.hoofdslaapkamer
+  }}
+
+  lamp_ryans_office_widget_sensors: !include { file: widgets/buttons/icon_text_buttons/light_buttons/sensors.yaml, vars: {
+    uid: lampen_slaapkamer_jess,
+    entity_id: light.slaapkamer_jess
+  }}
+
+  lampen_slaapkamer_imre_widget_sensors: !include { file: widgets/buttons/icon_text_buttons/light_buttons/sensors.yaml, vars: {
+    uid: lampen_slaapkamer_imre,
+    entity_id: light.slaapkamer_imre
+  }}
+
+  lampen_begane_grond_widget_sensors: !include { file: widgets/buttons/icon_text_buttons/light_group_buttons/sensors.yaml, vars: {
+    uid: lampen_begane_grond,
+    entity_id: light.begane_grond
+  }}
+
+  lampen_woonkamer_widget_sensors: !include { file: widgets/buttons/icon_text_buttons/light_buttons/sensors.yaml, vars: {
+    uid: lampen_woonkamer,
+    entity_id: light.woonkamer
+  }}
+
+  lampen_keuken_widget_sensors: !include { file: widgets/buttons/icon_text_buttons/light_buttons/sensors.yaml, vars: {
+    uid: lampen_keuken,
+    entity_id: light.keuken
+  }}
+
+  lampen_eethoek_widget_sensors: !include { file: widgets/buttons/icon_text_buttons/light_buttons/sensors.yaml, vars: {
+    uid: lampen_eethoek,
+    entity_id: light.eethoek
+  }}
+  lampen_tv_widget_sensors: !include { file: widgets/buttons/icon_text_buttons/light_buttons/sensors.yaml, vars: {
+    uid: lampen_tv,
+    entity_id: light.tv
+  }}
+  # lighting 2
+  lampen_tuin_widget_sensors: !include { file: widgets/buttons/icon_text_buttons/light_group_buttons/sensors.yaml, vars: {
+    uid: lampen_tuin,
+    entity_id: light.tuin
+  }}
+  lampen_tuinhuis_widget_sensors: !include { file: widgets/buttons/icon_text_buttons/light_group_buttons/sensors.yaml, vars: {
+    uid: lampen_tuinhuis,
+    entity_id: light.tuinhuis
+  }}
+
+  lamp_outside_1_widget_sensors: !include { file: widgets/buttons/icon_text_buttons/light_buttons/sensors.yaml, vars: {
+    uid: lamp_outside_1,
+    entity_id: light.outside_1
+  }}
+
+  lamp_outside_2_widget_sensors: !include { file: widgets/buttons/icon_text_buttons/light_buttons/sensors.yaml, vars: {
+    uid: lamp_outside_2,
+    entity_id: light.outside_2
+  }}
+

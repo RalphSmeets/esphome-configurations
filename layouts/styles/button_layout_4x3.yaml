@@ -1,0 +1,6 @@
+# layout:
+  type: GRID
+  grid_columns: [FR(1),FR(1),FR(1),FR(1)]
+  grid_rows: [FR(1),FR(1),FR(1)]
+  # pad_column: 4 # RESOLUTION-SPECIFIC # match container_styles.pad_all
+  # pad_row: 5 # RESOLUTION-SPECIFIC # match container_styles.pad_all
