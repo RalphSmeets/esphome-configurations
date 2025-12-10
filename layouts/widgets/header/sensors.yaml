@@ -16,12 +16,7 @@ time:
               text:
                 time_format: "%I:%M %p"
                 time: ha_time
-    on_idle:
-      timeout: !lambda "return (id(display_timeout).state * 1000);"
-      then:
-        - logger.log: "LVGL is idle"
-        - light.turn_off: backlight
-        - lvgl.pause:
+    
 
 # sensor:
 #   - id: thermostat_temp
