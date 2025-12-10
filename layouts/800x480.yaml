@@ -152,55 +152,7 @@ lvgl:
                       uid: lampen_slaapkamer_imre
                       entity_id: light.slaapkamer_imre
                       text: Imre
-                      <<: *button_widget_vars    
-
-    - id: lighting_2
-      <<: *page_styles
-      on_load:
-        - lvgl.label.update:
-            id: page_title
-            text: Lampen buiten
-      widgets:
-        - obj:
-            <<: *container_styles
-            layout:
-              <<: *button_layout
-            widgets:
-              - button: # buiten lampen
-                  <<: !include
-                    file: widgets/buttons/icon_text_buttons/light_group_buttons/widget.yaml
-                    vars:
-                      uid: lampen_tuin
-                      entity_id: light.tuin
-                      text: Tuin
-                      <<: *wide_button_widget_vars
-                      
-              - button: # buiten lampen
-                  <<: !include
-                    file: widgets/buttons/icon_text_buttons/light_group_buttons/widget.yaml
-                    vars:
-                      uid: lampen_tuinhuis
-                      entity_id: light.tuinhuis
-                      text: Tuinhuis
-                      <<: *wide_button_widget_vars
-
-              - button: # door lampen
-                  <<: !include
-                    file: widgets/buttons/icon_text_buttons/light_buttons/widget.yaml
-                    vars:
-                      uid: lamp_outside_1
-                      entity_id: light.outside_1
-                      text: Door Lampen
-                      <<: *button_widget_vars
-
-              - button: # deck lampen
-                  <<: !include
-                    file: widgets/buttons/icon_text_buttons/light_buttons/widget.yaml
-                    vars:
-                      uid: lamp_outside_2
-                      entity_id: light.outside_2
-                      text: Deck Lampen
-                      <<: *button_widget_vars
+                      <<: *button_widget_vars   
 
 
 packages:
